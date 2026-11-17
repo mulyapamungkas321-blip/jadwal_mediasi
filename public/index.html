@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jadwal Sidang Mediasi - Dinas Tenaga Kerja Kabupaten Tangerang</title>
+  <meta name="description" content="Jadwal sidang mediasi hubungan industrial Dinas Tenaga Kerja Kabupaten Tangerang." />
+  <link rel="icon" href="assets/logokab.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar no-print">
+    <div class="container">
+      <span>Dinas Tenaga Kerja Kabupaten Tangerang &middot; Bidang Hubungan Industrial</span>
+      <span id="topbar-info">Informasi resmi jadwal sidang mediasi</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/logokab.png" alt="Logo Kabupaten Tangerang" />
+        <span class="brand-text">
+          <span class="kab">Pemerintah Kabupaten Tangerang</span>
+          <h1>Jadwal Sidang Mediasi</h1>
+          <div class="sub">Dinas Tenaga Kerja &middot; Bidang Hubungan Industrial</div>
+        </span>
+      </a>
+      <nav class="header-nav no-print">
+        <a class="btn btn-ghost" href="#jadwal">Lihat Jadwal</a>
+        <button class="btn btn-primary guest-only" id="btn-login-open" type="button">Login Admin</button>
+        <span class="admin-chip admin-only">Admin: <strong id="current-user">-</strong></span>
+        <button class="btn btn-ghost admin-only" id="btn-logout" type="button">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <span class="tag">Informasi Resmi</span>
+        <h2>Jadwal Sidang Mediasi Hubungan Industrial</h2>
+        <p>Jadwal pelaksanaan sidang mediasi, klarifikasi, dan konsiliasi pada Dinas Tenaga Kerja Kabupaten Tangerang. Silakan gunakan filter tanggal, agenda, dan ruangan untuk menemukan jadwal Anda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="container">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="label">Total Jadwal</div>
+        <div class="value" id="stat-total">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Agenda Mediasi</div>
+        <div class="value" id="stat-mediasi">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Agenda Klarifikasi</div>
+        <div class="value" id="stat-klarifikasi">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Ruang / Lokasi</div>
+        <div class="value" id="stat-ruangan">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jadwal -->
+  <main class="section" id="jadwal">
+    <div class="container">
+      <div class="section-head">
+        <h3>Daftar Jadwal</h3>
+        <div class="no-print" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+          <span class="hint" id="result-count">Menampilkan 0 jadwal</span>
+          <button class="btn btn-outline btn-sm" id="btn-export" type="button">Export CSV</button>
+          <button class="btn btn-navy btn-sm" id="btn-print" type="button">Cetak</button>
+        </div>
+      </div>
+
+      <div class="print-title">
+        <strong>JADWAL SIDANG MEDIASI</strong><br />
+        Dinas Tenaga Kerja Kabupaten Tangerang
+      </div>
+
+      <!-- Panel kelola (khusus admin) -->
+      <section class="panel admin-block no-print" id="admin-panel">
+        <h3 id="form-title">Tambah Jadwal Baru</h3>
+        <form id="form-jadwal">
+          <input type="hidden" id="a-id" />
+          <input type="hidden" id="a-no" />
+          <div class="form-grid">
+            <div class="field">
+              <label for="a-noUrut">No Urut (Reg)</label>
+              <input type="text" id="a-noUrut" placeholder="mis. 266" />
+            </div>
+            <div class="field">
+              <label for="a-agenda">Agenda</label>
+              <select id="a-agenda">
+                <option value="KLARIFIKASI">KLARIFIKASI</option>
+                <option value="MEDIASI">MEDIASI</option>
+                <option value="KONSILIASI">KONSILIASI</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="a-perusahaan">Pihak Perusahaan</label>
+              <input type="text" id="a-perusahaan" placeholder="Nama perusahaan" required />
+            </div>
+            <div class="field full">
+              <label for="a-pekerja">Pihak Pekerja / Serikat / Kuasa Hukum</label>
+              <input type="text" id="a-pekerja" placeholder="Nama pihak pekerja / serikat / kuasa hukum" />
+            </div>
+            <div class="field">
+              <label for="a-mhi1">MHI 1</label>
+              <input type="text" id="a-mhi1" placeholder="Nama mediator / MHI 1" />
+            </div>
+            <div class="field">
+              <label for="a-mhi2">MHI 2</label>
+              <input type="text" id="a-mhi2" placeholder="Nama MHI 2" />
+            </div>
+            <div class="field">
+              <label for="a-tanggal">Tanggal</label>
+              <input type="date" id="a-tanggal" required />
+            </div>
+            <div class="field">
+              <label for="a-jam">Jam</label>
+              <input type="time" id="a-jam" required />
+            </div>
+            <div class="field">
+              <label for="a-ruangan">Ruangan</label>
+              <input type="text" id="a-ruangan" list="list-ruangan" placeholder="mis. Ruang Harmonis lt. 1" />
+              <datalist id="list-ruangan"></datalist>
+            </div>
+            <div class="field">
+              <label for="a-ket">KET</label>
+              <input type="text" id="a-ket" placeholder="mis. K1 / M1 / M3" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-navy" id="btn-simpan">Simpan Jadwal</button>
+            <button type="button" class="btn btn-outline" id="btn-batal" style="display:none;">Batal Edit</button>
+            <button type="button" class="btn btn-danger" id="btn-reset-data" style="margin-left:auto;">Reset ke Data Awal</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Filter -->
+      <div class="filters no-print">
+        <div class="filter-row">
+          <div class="field grow">
+            <label for="f-cari">Pencarian</label>
+            <input type="search" id="f-cari" placeholder="Cari perusahaan, MHI, kuasa hukum, ruangan..." />
+          </div>
+          <div class="field">
+            <label for="f-agenda">Agenda</label>
+            <select id="f-agenda">
+              <option value="">Semua Agenda</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-ruangan">Ruangan</label>
+            <select id="f-ruangan">
+              <option value="">Semua Ruangan</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-ket">Kategori (KET)</label>
+            <select id="f-ket">
+              <option value="">Semua KET</option>
+            </select>
+          </div>
+          <button class="btn btn-outline" id="btn-reset" type="button">Reset</button>
+        </div>
+        <div class="tabs" id="tabs-tanggal"></div>
+      </div>
+
+      <!-- Tabel -->
+      <div class="table-wrap">
+        <table class="jadwal">
+          <thead>
+            <tr>
+              <th class="col-no">No</th>
+              <th class="col-urut">No Urut</th>
+              <th>Pihak Perusahaan</th>
+              <th>Pihak Pekerja / Serikat / Kuasa Hukum</th>
+              <th>MHI 1</th>
+              <th>MHI 2</th>
+              <th>Agenda</th>
+              <th>Jadwal</th>
+              <th>Ruangan</th>
+              <th>Ket</th>
+              <th class="col-aksi">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-jadwal"></tbody>
+        </table>
+        <div class="empty" id="empty-state" style="display:none;">Tidak ada jadwal yang cocok dengan filter.</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="cols">
+        <div>
+          <h4>Dinas Tenaga Kerja</h4>
+          Kabupaten Tangerang<br />
+          Bidang Hubungan Industrial
+        </div>
+        <div>
+          <h4>Navigasi</h4>
+          <a href="index.html">Jadwal Mediasi</a>
+        </div>
+        <div>
+          <h4>Catatan</h4>
+          Jadwal dapat berubah sewaktu-waktu.<br />
+          Mohon hadir 15 menit sebelum jadwal dimulai.
+        </div>
+      </div>
+      <div class="bottom">
+        &copy; <span id="tahun"></span> Dinas Tenaga Kerja Kabupaten Tangerang. Seluruh hak cipta dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Login Admin -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <img src="assets/logokab.png" alt="Logo Kabupaten Tangerang" />
+        <div>
+          <h3>Login Admin</h3>
+          <p>Masuk untuk mengelola jadwal</p>
+        </div>
+        <button class="modal-close" id="btn-login-close" type="button" aria-label="Tutup">&times;</button>
+      </div>
+      <form id="login-form" autocomplete="off">
+        <div class="field">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" placeholder="Masukkan username" required />
+        </div>
+        <div class="field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Masukkan password" required />
+        </div>
+        <div class="login-error" id="login-error" style="display:none;"></div>
+        <button type="submit" class="btn btn-navy login-btn" id="btn-login-submit">Masuk</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

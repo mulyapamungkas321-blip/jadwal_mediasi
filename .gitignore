@@ -1,0 +1,4 @@
+node_modules/
+.env
+data/jadwal.json
+npm-debug.log*

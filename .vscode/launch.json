@@ -1,0 +1,17 @@
+{
+  // Konfigurasi F5 di VS Code: menjalankan server Node lalu membuka website.
+  // Tekan F5 -> server jalan -> browser otomatis membuka http://localhost:3000
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jalankan Website (server)",
+      "program": "${workspaceFolder}/server.js",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "env": { "OPEN_BROWSER": "1" }
+    }
+  ]
+}
