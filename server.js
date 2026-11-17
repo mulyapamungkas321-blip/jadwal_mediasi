@@ -39,7 +39,10 @@ const seedData = require("./seed-data.js");
 
 const PORT = Number(process.env.PORT) || 3000;
 const ADMIN_USER = process.env.ADMIN_USER || "disnaker";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "disnaker123";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+if (!ADMIN_PASSWORD) {
+  throw new Error("ADMIN_PASSWORD belum diatur. Salin .env.example menjadi .env lalu isi ADMIN_PASSWORD.");
+}
 const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex");
 
 /* ------------------------ Hashing password (scrypt) --------------------- */

@@ -58,11 +58,12 @@ Buka browser di: [http://localhost:3000](http://localhost:3000)
 
 ## ⚙️ Pengaturan (.env)
 
-Pengaturan server dan database disimpan di file [`.env`](file:///C:/Users/David/Documents/Jadwal_Mediasi/.env):
+Pengaturan server dan database disimpan di file `.env` (file ini tidak ikut ter-upload ke GitHub). Salin [`.env.example`](.env.example) menjadi `.env`, lalu isi nilainya sendiri:
 
 ```env
 ADMIN_USER=disnaker
-ADMIN_PASSWORD=disnaker123
+ADMIN_PASSWORD=ganti-password-anda
+SESSION_SECRET=ganti-dengan-string-acak-panjang
 PORT=3000
 
 # Konfigurasi Database MySQL (XAMPP)
