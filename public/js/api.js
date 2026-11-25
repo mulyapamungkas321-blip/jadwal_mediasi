@@ -1,6 +1,4 @@
-/*
- * api.js - Pembungkus fetch ke API server
- */
+
 var Api = (function () {
   "use strict";
 

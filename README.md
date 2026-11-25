@@ -2,6 +2,8 @@
 
 Aplikasi web untuk menampilkan dan mengelola jadwal sidang mediasi hubungan industrial pada Dinas Tenaga Kerja Kabupaten Tangerang.
 
+Diagram alur aplikasi tersedia di [`docs/FLOWCHART.md`](docs/FLOWCHART.md).
+
 ---
 
 ## 🗄️ Konfigurasi Database (MySQL / XAMPP)
